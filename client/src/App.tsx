@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import Home from './pages/home'
+import { Route, Routes } from 'react-router-dom'
 function App() {
   const [text, setText] = useState()
 
@@ -10,9 +11,11 @@ function App() {
   }
 
   return (
-    <div>
-      <Home />
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </>
   )
 }
 
