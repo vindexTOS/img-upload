@@ -14,12 +14,12 @@ export interface Cell {
   uploadFileToFirebaseStorage: (e: React.FormEvent<HTMLFormElement>) => void
   htmlImg: String | null
   imgUploadDrag: (e: React.DragEvent<HTMLLabelElement>) => void
-  removeImgFromHtml: (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => void
+  removeImgFromHtml: () => void
   loading: boolean
   error: string
   imgUrl: string
+  imgData: any
+  setError: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const ContextImg = createContext<Cell | null>(null)
@@ -29,7 +29,7 @@ export const ContextImgProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [image, setImage] = useState<any>()
+  const [image, setImage] = useState<any>(null)
   const [htmlImg, setHtmlImg] = useState<String | null>(null)
   const [imgUrl, setImgUrl] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
@@ -56,10 +56,7 @@ export const ContextImgProvider = ({
     setHtmlImg(newHtmlImg)
   }
 
-  const removeImgFromHtml = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    e.stopPropagation()
+  const removeImgFromHtml = () => {
     setImage(null)
     setHtmlImg(null)
   }
@@ -78,6 +75,7 @@ export const ContextImgProvider = ({
         setImgUrl(downloadURL)
         setLoading(false)
         console.log('succsess')
+        removeImgFromHtml()
       } catch (error) {
         console.log(error)
         console.log('ერრორ')
@@ -107,6 +105,14 @@ export const ContextImgProvider = ({
       returnURL()
     }
   }, [imgUrl])
+  /// resiving data
+  const [imgData, setImgData] = useState<any>([])
+  React.useEffect(() => {
+    axios
+      .get(serverUrl)
+      .then((res) => setImgData(res.data.data))
+      .catch((err) => console.log(err))
+  }, [])
   return (
     <ContextImg.Provider
       value={{
@@ -118,6 +124,8 @@ export const ContextImgProvider = ({
         loading,
         error,
         imgUrl,
+        imgData,
+        setError,
       }}
     >
       {children}
