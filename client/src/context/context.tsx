@@ -112,7 +112,7 @@ export const ContextImgProvider = ({
       .get(serverUrl)
       .then((res) => setImgData(res.data.data))
       .catch((err) => console.log(err))
-  }, [])
+  }, [error])
   return (
     <ContextImg.Provider
       value={{

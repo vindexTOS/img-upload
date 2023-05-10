@@ -2,6 +2,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import Home from './pages/home'
 import { Route, Routes } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import Gallary from './pages/Gallary'
 function App() {
   const [text, setText] = useState()
 
@@ -12,8 +14,10 @@ function App() {
 
   return (
     <>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/gallary" element={<Gallary />} />
       </Routes>
     </>
   )

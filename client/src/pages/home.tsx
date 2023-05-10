@@ -24,7 +24,7 @@ const Home = () => {
     label: `w-[700px] h-[400px]   
       box  cursor-pointer outline outline-dotted outline-orange-500  flex items-center justify-center rounded-[12px]`,
     icon: `text-[5rem] text-yellow-500  absolute   `,
-    btn: `w-[700px] text-white h-[4rem] absolute flex items-center justify-center  bg-orange-500 hover:bg-orange-400 rounded-[10px] bottom-[10%] cursor-pointer`,
+    btn: `w-[700px] text-white h-[4rem] absolute flex items-center justify-center  bg-orange-500 hover:bg-orange-400 rounded-[10px] bottom-[5%] cursor-pointer`,
   }
   const [hover, setHover] = React.useState<boolean>(false)
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
